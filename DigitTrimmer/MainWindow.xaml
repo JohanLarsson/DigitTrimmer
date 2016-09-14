@@ -85,7 +85,14 @@
                          IsReadOnly="True"
                          Text="{Binding Output,
                                         Mode=OneWay,
-                                        UpdateSourceTrigger=PropertyChanged}" />
+                                        UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.Background>
+                        <MultiBinding Converter="{digitTrimmer:AreEqualToBrushConverter WhenEqual=PaleGreen, WhenNot=Transparent}">
+                            <Binding ElementName="Input" Path="Text" />
+                            <Binding ElementName="Output" Path="Text" />
+                        </MultiBinding>
+                    </TextBox.Background>
+                </TextBox>
                 <Border Grid.Column="1" Background="Gray">
                     <Canvas Width="{Binding Size,
                                             Converter={x:Static digitTrimmer:NullableDoubleToDoubleConverter.Default}}"

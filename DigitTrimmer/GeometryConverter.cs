@@ -34,7 +34,7 @@
             var geometry = Geometry.Parse(text);
             var topLeft = geometry.Bounds.TopLeft;
             var transform = new TranslateTransform(-topLeft.X, -topLeft.Y);
-            var combined = Geometry.Combine(geometry, geometry, GeometryCombineMode.Intersect, transform);
+            var combined = Geometry.Combine(geometry, geometry, GeometryCombineMode.Intersect, transform, 0.1, ToleranceType.Relative);
             return combined.ToString(CultureInfo.InvariantCulture);
         }
 
@@ -44,7 +44,7 @@
             var topLeft = geometry.Bounds.TopLeft;
             var currentSize = Math.Max(geometry.Bounds.Width, geometry.Bounds.Height);
             var transform = new ScaleTransform(size / currentSize, size / currentSize, topLeft.X, topLeft.Y);
-            var combined = Geometry.Combine(geometry, geometry, GeometryCombineMode.Intersect, transform);
+            var combined = Geometry.Combine(geometry, geometry, GeometryCombineMode.Intersect, transform, 0.1, ToleranceType.Relative);
             return combined.ToString(CultureInfo.InvariantCulture);
         }
     }

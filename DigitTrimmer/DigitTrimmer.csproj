@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AreEqualToBrushConverter.cs" />
     <Compile Include="GeometryConverter.cs" />
     <Compile Include="NullableDoubleToDoubleConverter.cs" />
     <Compile Include="Parser.cs" />
