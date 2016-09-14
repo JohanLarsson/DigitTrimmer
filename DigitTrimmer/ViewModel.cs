@@ -8,7 +8,7 @@
     public class ViewModel : INotifyPropertyChanged
     {
         private string input;
-        private int digits;
+        private int? digits = 0;
         private bool shiftToOrigin;
         private double? size;
 
@@ -36,7 +36,7 @@
 
         public string Output => this.GetOutput();
 
-        public int Digits
+        public int? Digits
         {
             get
             {
@@ -122,7 +122,9 @@
                     text = GeometryConverter.WithSize(text, this.size.Value);
                 }
 
-                return GeometryConverter.RoundDigits(text, this.digits);
+                return this.digits.HasValue
+                           ? GeometryConverter.RoundDigits(text, this.digits.Value)
+                           : text;
             }
             catch (Exception)
             {

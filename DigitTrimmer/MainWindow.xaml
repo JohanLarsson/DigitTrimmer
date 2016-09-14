@@ -32,7 +32,7 @@
                            Text="Digits" />
                 <TextBox Grid.Row="0"
                          Grid.Column="2"
-                         Text="{Binding Digits}" />
+                         Text="{Binding Digits, TargetNullValue=''}" />
                 <TextBlock Grid.Row="1"
                            Grid.Column="0"
                            Text="Size" />
@@ -49,15 +49,39 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="1" Header="Input">
-            <TextBox x:Name="InTb" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
+        <GroupBox Grid.Row="1"
+                  Height="100"
+                  Header="Input">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="Input" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
+                <Path Grid.Column="1"
+                      Data="{Binding Input}"
+                      Fill="Yellow"
+                      Stretch="None"
+                      Stroke="Blue" />
+            </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Header="Output">
-            <TextBox x:Name="OutTb"
-                     IsReadOnly="True"
-                     Text="{Binding Output,
-                                    Mode=OneWay,
-                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="Output"
+                         IsReadOnly="True"
+                         Text="{Binding Output,
+                                        Mode=OneWay,
+                                        UpdateSourceTrigger=PropertyChanged}" />
+                <Path Grid.Column="1"
+                      Data="{Binding Output}"
+                      Fill="Yellow"
+                      Stretch="None"
+                      Stroke="Blue" />
+            </Grid>
         </GroupBox>
     </Grid>
 </Window>
