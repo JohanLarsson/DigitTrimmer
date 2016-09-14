@@ -1,7 +1,6 @@
 ﻿<Window x:Class="DigitTrimmer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:autoRowGrid="http://gu.se/AutoRowGrid"
         xmlns:digitTrimmer="clr-namespace:DigitTrimmer"
         Title="MainWindow"
         Width="525"
@@ -12,8 +11,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <GroupBox Header="Settings">
             <Grid>
@@ -32,7 +31,8 @@
                            Text="Digits" />
                 <TextBox Grid.Row="0"
                          Grid.Column="2"
-                         Text="{Binding Digits, TargetNullValue=''}" />
+                         Text="{Binding Digits,
+                                        TargetNullValue=''}" />
                 <TextBlock Grid.Row="1"
                            Grid.Column="0"
                            Text="Size" />
@@ -50,37 +50,55 @@
         </GroupBox>
 
         <GroupBox Grid.Row="1"
-                  Height="100"
+                  MinHeight="124"
                   Header="Input">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="Input" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
-                <Path Grid.Column="1"
-                      Data="{Binding Input}"
-                      Fill="Yellow"
-                      Stretch="None"
-                      Stroke="Blue" />
+                <Border Grid.Column="1" Background="Gray">
+                    <Canvas Width="{Binding Size,
+                                            Converter={x:Static digitTrimmer:NullableDoubleToDoubleConverter.Default}}"
+                            Height="{Binding Size,
+                                             Converter={x:Static digitTrimmer:NullableDoubleToDoubleConverter.Default}}"
+                            Margin="12"
+                            Background="LightGray">
+                        <Path Data="{Binding Input}"
+                              Fill="Yellow"
+                              Stretch="None"
+                              Stroke="Blue" />
+                    </Canvas>
+                </Border>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="2" Header="Output">
+        <GroupBox Grid.Row="2"
+                  MinHeight="124"
+                  Header="Output">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="Output"
                          IsReadOnly="True"
                          Text="{Binding Output,
                                         Mode=OneWay,
                                         UpdateSourceTrigger=PropertyChanged}" />
-                <Path Grid.Column="1"
-                      Data="{Binding Output}"
-                      Fill="Yellow"
-                      Stretch="None"
-                      Stroke="Blue" />
+                <Border Grid.Column="1" Background="Gray">
+                    <Canvas Width="{Binding Size,
+                                            Converter={x:Static digitTrimmer:NullableDoubleToDoubleConverter.Default}}"
+                            Height="{Binding Size,
+                                             Converter={x:Static digitTrimmer:NullableDoubleToDoubleConverter.Default}}"
+                            Margin="12"
+                            Background="LightGray">
+                        <Path Data="{Binding Output}"
+                              Fill="Yellow"
+                              Stretch="None"
+                              Stroke="Blue" />
+                    </Canvas>
+                </Border>
             </Grid>
         </GroupBox>
     </Grid>
