@@ -1,18 +1,29 @@
 ﻿namespace DigitTrimmer
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Windows;
+    using System.Windows.Media;
     using JetBrains.Annotations;
 
     public class ViewModel : INotifyPropertyChanged
     {
         private string input;
         private int? digits = 0;
-        private bool shiftToOrigin;
+        private bool alignTopLeft;
         private double? size;
+        private bool center;
+        private bool noShift;
+        private Thickness margin;
+        private double tolerance = 0.001;
+        private ToleranceType toleranceType;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public IEnumerable<ToleranceType> ToleranceTypes => Enum.GetValues(typeof(ToleranceType)).Cast<ToleranceType>();
 
         public string Input
         {
@@ -56,23 +67,80 @@
             }
         }
 
-        public bool ShiftToOrigin
+        public bool NoShift
         {
             get
             {
-                return this.shiftToOrigin;
+                return this.noShift;
             }
 
             set
             {
-                if (value == this.shiftToOrigin)
+                if (value == this.noShift)
                 {
                     return;
                 }
 
-                this.shiftToOrigin = value;
+                this.noShift = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public bool Center
+        {
+            get
+            {
+                return this.center;
+            }
+
+            set
+            {
+                if (value == this.center)
+                {
+                    return;
+                }
+
+                this.center = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public bool AlignTopLeft
+        {
+            get
+            {
+                return this.alignTopLeft;
+            }
+
+            set
+            {
+                if (value == this.alignTopLeft)
+                {
+                    return;
+                }
+
+                this.alignTopLeft = value;
                 this.OnPropertyChanged();
                 this.OnPropertyChanged(nameof(this.Output));
+            }
+        }
+
+        public Thickness Margin
+        {
+            get
+            {
+                return this.margin;
+            }
+
+            set
+            {
+                if (value.Equals(this.margin))
+                {
+                    return;
+                }
+
+                this.margin = value;
+                this.OnPropertyChanged();
             }
         }
 
@@ -96,6 +164,44 @@
             }
         }
 
+        public double Tolerance
+        {
+            get
+            {
+                return this.tolerance;
+            }
+
+            set
+            {
+                if (value.Equals(this.tolerance))
+                {
+                    return;
+                }
+
+                this.tolerance = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public ToleranceType ToleranceType
+        {
+            get
+            {
+                return this.toleranceType;
+            }
+
+            set
+            {
+                if (value == this.toleranceType)
+                {
+                    return;
+                }
+
+                this.toleranceType = value;
+                this.OnPropertyChanged();
+            }
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -112,9 +218,9 @@
             try
             {
                 var text = this.input;
-                if (this.shiftToOrigin)
+                if (this.alignTopLeft)
                 {
-                    text = GeometryConverter.ShiftToOrigin(text);
+                    text = GeometryConverter.ShiftToTopLeft(text);
                 }
 
                 if (this.size != null)

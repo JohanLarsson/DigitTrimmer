@@ -20,6 +20,8 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -40,12 +42,25 @@
                          Grid.Column="2"
                          Text="{Binding Size,
                                         TargetNullValue=''}" />
+
                 <TextBlock Grid.Row="2"
                            Grid.Column="0"
-                           Text="Shift to origin" />
-                <CheckBox Grid.Row="2"
-                          Grid.Column="2"
-                          IsChecked="{Binding ShiftToOrigin}" />
+                           Text="Margin" />
+                <TextBox Grid.Row="2"
+                         Grid.Column="2"
+                         Text="{Binding Margin,
+                                        TargetNullValue=''}" />
+                <StackPanel Grid.Row="2"
+                            Grid.Column="2"
+                            Orientation="Horizontal">
+                    <RadioButton Content="None" IsChecked="{Binding NoShift}" />
+                    <RadioButton Content="TopLeft" IsChecked="{Binding AlignTopLeft}" />
+                    <RadioButton Content="Center" IsChecked="{Binding Center}" />
+                </StackPanel>
+
+                <TextBlock Grid.Row="3"
+                           Grid.Column="0"
+                           Text="Shift" />
             </Grid>
         </GroupBox>
 

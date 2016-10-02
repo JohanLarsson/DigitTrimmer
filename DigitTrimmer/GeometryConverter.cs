@@ -29,7 +29,7 @@
             return replace;
         }
 
-        public static string ShiftToOrigin(string text)
+        public static string ShiftToTopLeft(string text)
         {
             var geometry = Geometry.Parse(text);
             var topLeft = geometry.Bounds.TopLeft;
