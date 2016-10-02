@@ -16,10 +16,10 @@
         private bool alignTopLeft;
         private double? size;
         private bool center;
-        private bool noShift;
-        private Thickness margin;
-        private double tolerance = 0.001;
-        private ToleranceType toleranceType;
+        private bool noShift = true;
+        private double? margin;
+        private double tolerance = 0.1;
+        private ToleranceType toleranceType = ToleranceType.Relative;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -102,6 +102,7 @@
 
                 this.center = value;
                 this.OnPropertyChanged();
+                this.OnPropertyChanged(nameof(this.Output));
             }
         }
 
@@ -125,7 +126,7 @@
             }
         }
 
-        public Thickness Margin
+        public double? Margin
         {
             get
             {
@@ -141,6 +142,7 @@
 
                 this.margin = value;
                 this.OnPropertyChanged();
+                this.OnPropertyChanged(nameof(this.Output));
             }
         }
 
@@ -180,6 +182,7 @@
 
                 this.tolerance = value;
                 this.OnPropertyChanged();
+                this.OnPropertyChanged(nameof(this.Output));
             }
         }
 
@@ -199,6 +202,7 @@
 
                 this.toleranceType = value;
                 this.OnPropertyChanged();
+                this.OnPropertyChanged(nameof(this.Output));
             }
         }
 
@@ -218,14 +222,19 @@
             try
             {
                 var text = this.input;
-                if (this.alignTopLeft)
-                {
-                    text = GeometryConverter.ShiftToTopLeft(text);
-                }
-
+                var effectiveMargin = this.margin ?? 0;
                 if (this.size != null)
                 {
-                    text = GeometryConverter.WithSize(text, this.size.Value);
+                    text = GeometryConverter.WithSize(text, this.size.Value - 2 * effectiveMargin, this.tolerance, this.ToleranceType);
+                }
+
+                if (this.alignTopLeft)
+                {
+                    text = GeometryConverter.ShiftToTopLeft(text, effectiveMargin, this.tolerance, this.ToleranceType);
+                }
+                else if (this.Center && this.size != null)
+                {
+                    text = GeometryConverter.ShiftToCenter(text, this.size.Value, this.tolerance, this.ToleranceType);
                 }
 
                 return this.digits.HasValue

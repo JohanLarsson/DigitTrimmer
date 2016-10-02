@@ -50,7 +50,7 @@
                          Grid.Column="2"
                          Text="{Binding Margin,
                                         TargetNullValue=''}" />
-                <StackPanel Grid.Row="2"
+                <StackPanel Grid.Row="3"
                             Grid.Column="2"
                             Orientation="Horizontal">
                     <RadioButton Content="None" IsChecked="{Binding NoShift}" />
@@ -72,7 +72,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="Input" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Name="Input" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
                 <Border Grid.Column="1" Background="Gray">
                     <Canvas Width="{Binding Size,
                                             Converter={x:Static digitTrimmer:NullableDoubleToDoubleConverter.Default}}"
@@ -98,6 +98,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="Output"
                          IsReadOnly="True"
+                         TextWrapping="Wrap"
                          Text="{Binding Output,
                                         Mode=OneWay,
                                         UpdateSourceTrigger=PropertyChanged}">
