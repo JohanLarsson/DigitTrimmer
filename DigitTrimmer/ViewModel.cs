@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using JetBrains.Annotations;
 
     public class ViewModel : INotifyPropertyChanged
     {
@@ -16,10 +15,7 @@
 
         public string Input
         {
-            get
-            {
-                return this.input;
-            }
+            get => this.input;
 
             set
             {
@@ -38,10 +34,7 @@
 
         public int? Digits
         {
-            get
-            {
-                return this.digits;
-            }
+            get => this.digits;
 
             set
             {
@@ -58,10 +51,7 @@
 
         public bool ShiftToOrigin
         {
-            get
-            {
-                return this.shiftToOrigin;
-            }
+            get => this.shiftToOrigin;
 
             set
             {
@@ -78,10 +68,7 @@
 
         public double? Size
         {
-            get
-            {
-                return this.size;
-            }
+            get => this.size;
 
             set
             {
@@ -96,7 +83,6 @@
             }
         }
 
-        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

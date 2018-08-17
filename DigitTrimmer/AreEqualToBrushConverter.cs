@@ -6,6 +6,7 @@
     using System.Windows.Markup;
     using System.Windows.Media;
 
+    [MarkupExtensionReturnType(typeof(AreEqualToBrushConverter))]
     public class AreEqualToBrushConverter : MarkupExtension, IMultiValueConverter
     {
         public Brush WhenEqual { get; set; }

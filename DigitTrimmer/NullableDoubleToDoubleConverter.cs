@@ -4,6 +4,7 @@
     using System.Globalization;
     using System.Windows.Data;
 
+    [ValueConversion(typeof(double?), typeof(double))]
     public class NullableDoubleToDoubleConverter : IValueConverter
     {
         public static readonly NullableDoubleToDoubleConverter Default = new NullableDoubleToDoubleConverter();
