@@ -6,14 +6,14 @@
 
     public class ViewModel : INotifyPropertyChanged
     {
-        private string input;
+        private string? input;
         private int? digits = 0;
         private bool shiftToOrigin;
         private double? size;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public string Input
+        public string? Input
         {
             get => this.input;
 
@@ -83,7 +83,7 @@
             }
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -112,7 +112,9 @@
                            ? GeometryConverter.RoundDigits(text, this.digits.Value)
                            : text;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception)
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 return string.Empty;
             }

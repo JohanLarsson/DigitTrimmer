@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Text.RegularExpressions;
     using System.Windows;
@@ -18,24 +19,21 @@
             SkipWhitespace(geometry, ref pos);
             while (pos < geometry.Length)
             {
-                string token;
-                if (TryParseToken(geometry, ref pos, out token))
+                if (TryParseToken(geometry, ref pos, out var token))
                 {
                     yield return token;
                     SkipWhitespace(geometry, ref pos);
                     continue;
                 }
 
-                Point point;
-                if (TryParsePoint(geometry, ref pos, out point))
+                if (TryParsePoint(geometry, ref pos, out var point))
                 {
                     yield return point;
                     SkipWhitespace(geometry, ref pos);
                     continue;
                 }
 
-                double value;
-                if (TryParseDouble(geometry, ref pos, out value))
+                if (TryParseDouble(geometry, ref pos, out var value))
                 {
                     yield return value;
                     SkipWhitespace(geometry, ref pos);
@@ -51,15 +49,14 @@
             }
         }
 
-        private static bool TryParseToken(string geometry, ref int pos, out string token)
+        private static bool TryParseToken(string geometry, ref int pos, [NotNullWhen(true)]out string? token)
         {
             SkipWhitespace(geometry, ref pos);
             if (pos < geometry.Length && char.IsLetter(geometry[pos]))
             {
                 token = new string(geometry[pos], 1);
                 pos++;
-                string temp;
-                if (TryParseToken(geometry, ref pos, out temp))
+                if (TryParseToken(geometry, ref pos, out _))
                 {
                     throw new FormatException($"two tokens in a row at position {pos} in string {geometry}");
                 }

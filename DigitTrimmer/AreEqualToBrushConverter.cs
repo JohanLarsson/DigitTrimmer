@@ -9,11 +9,11 @@
     [MarkupExtensionReturnType(typeof(AreEqualToBrushConverter))]
     public class AreEqualToBrushConverter : MarkupExtension, IMultiValueConverter
     {
-        public Brush WhenEqual { get; set; }
+        public Brush? WhenEqual { get; set; }
 
-        public Brush WhenNot { get; set; }
+        public Brush? WhenNot { get; set; }
 
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.Length != 2)
             {
