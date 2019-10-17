@@ -3,6 +3,7 @@
     <OutputType>WinExe</OutputType>
     <UseWpf>true</UseWpf>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <CodeAnalysisRuleSet>DigitTrimmer.ruleset</CodeAnalysisRuleSet>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
