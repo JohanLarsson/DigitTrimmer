@@ -1,7 +1,0 @@
-group Analyzers
-  AsyncUsageAnalyzers
-  IDisposableAnalyzers
-  PropertyChangedAnalyzers
-  StyleCop.Analyzers
-  WpfAnalyzers
-  Gu.Analyzers
