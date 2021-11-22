@@ -1,4 +1,4 @@
-﻿namespace DigitTrimmer
+namespace DigitTrimmer
 {
     using System;
     using System.ComponentModel;
@@ -112,9 +112,7 @@
                            ? GeometryConverter.RoundDigits(text, this.digits.Value)
                            : text;
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception)
-#pragma warning restore CA1031 // Do not catch general exception types
             {
                 return string.Empty;
             }
