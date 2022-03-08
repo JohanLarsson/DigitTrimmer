@@ -72,7 +72,7 @@ namespace DigitTrimmer
 
             set
             {
-                if (value.Equals(this.size))
+                if (value == this.size)
                 {
                     return;
                 }

@@ -1,4 +1,4 @@
-﻿namespace DigitTrimmer
+namespace DigitTrimmer
 {
     using System;
     using System.Collections.Generic;

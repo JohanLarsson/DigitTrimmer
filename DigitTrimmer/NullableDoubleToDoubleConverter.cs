@@ -1,4 +1,4 @@
-﻿namespace DigitTrimmer
+namespace DigitTrimmer
 {
     using System;
     using System.Globalization;
@@ -20,7 +20,7 @@
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException($"{nameof(NullableDoubleToDoubleConverter)} can only be used in OneWay bindings");
         }
     }
 }

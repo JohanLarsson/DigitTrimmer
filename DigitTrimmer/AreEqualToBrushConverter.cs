@@ -1,4 +1,4 @@
-﻿namespace DigitTrimmer
+namespace DigitTrimmer
 {
     using System;
     using System.Globalization;
@@ -25,14 +25,14 @@
                        : this.WhenNot;
         }
 
-        object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return this;
+        }
+
+        object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException($"{nameof(AreEqualToBrushConverter)} can only be used in OneWay bindings");
         }
     }
 }

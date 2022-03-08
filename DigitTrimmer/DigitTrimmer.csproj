@@ -3,6 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Nullable>Enable</Nullable>
     <LangVersion>latest</LangVersion>
     <EmbedAllSources>true</EmbedAllSources>
     <DebugType>embedded</DebugType>
