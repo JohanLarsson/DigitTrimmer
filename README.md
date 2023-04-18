@@ -1,4 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/xn3tq2a0esq2toqf/branch/master?svg=true)](https://ci.appveyor.com/project/JohanLarsson/digittrimmer/branch/master)
+[![ci](https://github.com/JohanLarsson/DigitTrimmer/actions/workflows/ci.yml/badge.svg)](https://github.com/JohanLarsson/DigitTrimmer/actions/workflows/ci.yml)
 
 Small utility for making xaml paths pretty.
 
